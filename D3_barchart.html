@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>D3</title>
+		<!-- <script type="text/javascript" src="d3/d3.v4.js"></script> -->
+		<script type="text/javascript" src="d3/d3.v3.js" charset="utf-8"></script>
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var data_2 = [23,13,32,25,12,8,5,34,24,65,42,16,54];
+			var w = 600,
+				h =300;
+
+			var barPadding =1;
+
+			var xScale = d3.scale.ordinal()
+				.domain(d3.range(data_2.length))
+				.rangeRoundBands();
+
+			var svg = d3.select("body")
+				.append("svg")
+				.attr("width",w)
+				.attr("height",h);
+
+			var rect = svg.selectAll("rect")
+				.data(data_2)
+				.enter()
+				.append("rect")
+				.attr({
+					"x" :function(d,i){
+						return i*(w/data_2.length);
+					},
+					"y":function(d){
+						return h-(d*6);
+					},
+					"width": w/data_2.length-barPadding,
+					"height" : function(d){ 
+						return d*6; 
+					},
+					"fill": function(d){
+						return "rgb(0,0,"+d*10+")"; 
+					}
+				});
+
+				svg.selectAll("text")
+					.data(data_2)
+					.enter()
+					.append("text")
+					.text(function(d){
+					return d;
+				})
+				.attr({
+					"x" :function(d,i){
+						return i*(w/data_2.length)+20;
+					},
+					"y":function(d){
+						return h-(d*6)+18;
+					},
+					"font-family": "sans-serif",
+					"font-size": "14px",
+					"fill":"white",
+					"text-anchor":"middle"
+				});
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

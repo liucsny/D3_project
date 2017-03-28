@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script type="text/javascript" src="d3/d3.v3.js" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+
+			var height = 120,
+				width = 200;
+
+			var data=[
+					  {x:'a',y:135},
+					  {x:'b',y:138},
+					  {x:'c',y:132},
+					  {x:'d',y:121},
+					  {x:'e',y:126},
+					  {x:'f',y:140},
+					  {x:'g',y:123},
+					  {x:'h',y:89},
+					  {x:'i',y:79},
+					  {x:'j',y:83}
+					];
+
+			var s = d3.select('body')
+				.append("svg");
+
+			s.attr({
+			    	'width': width,
+			    	'height': 200,
+			 		})
+				.style({
+			    	'border':'1px solid #000'
+			 		});
+
+			var scaleX1 = d3.scale 
+				.ordinal() 
+				.domain(data.map(function(d){return(d.x);}))
+				.range([0, width]);
+
+			var scaleX2 = d3.scale 
+				.ordinal() 
+				.domain(data.map(function(d){return(d.x);}))
+				.range([0,20,40,60,80,100,120,140,160,180]);
+
+			var scaleY = d3.scale
+				.linear()
+				.domain([0,150])
+				.range([0,height]);
+
+			console.log(data[0].x);
+			console.log(scaleX2(data[0].x));
+			console.log(data[0].y);
+			console.log(scaleY(data[0].y));
+			console.log(data[1].x);
+			console.log(scaleX2(data[1].x));
+			console.log(data[1].y);
+			console.log(scaleY(data[1].y));
+			console.log(data[2].x);
+			console.log(scaleX2(data[2].x));
+			console.log(data[2].y);
+			console.log(scaleY(data[2].y));
+			console.log(data[3].x);
+			console.log(scaleX2(data[3].x));
+			console.log(data[3].y);
+			console.log(scaleY(data[3].y));
+			console.log(data.map(function(d){return(d)}));
+			console.log(data.map(function(d){return(d.x)}));
+			console.log(data.x)
+
+
+			var line1 = d3.svg.line()
+				.x(function(d) {
+					return scaleX1(d.x);
+				}).y(function(d) {
+					return scaleY(d.y);
+				});
+
+
+			var line2 = d3.svg.line()
+				.x(function(d) {
+					return scaleX2(d.x);
+				}).y(function(d) {
+					return scaleY(d.y);
+				});
+
+			s.append('path')
+				.attr({
+					'd':line1(data),
+					'stroke':'blue',
+					'fill':'none'
+					});
+
+			s.append('path')
+				.attr({
+					'd':line2(data),
+					'stroke':'#f66',
+					'fill':'none',
+					'transform': 'translate(0,80)'
+					});	
+		</script>
+	</body>
+</html>
