@@ -33,7 +33,13 @@
 
 			d3.select("p")
 				.on("click",function(){
-					data_2 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
+
+					var numberValue = data_2.length;
+					data_2 = [];
+					for (var i = 0; i < numberValue; i++) {
+						var newValue = Math.round(Math.random()*40);
+						data_2.push(newValue);
+					};
 
 					svg.selectAll("rect")
 						.data(data_2)
