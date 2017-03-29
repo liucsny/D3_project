@@ -72,7 +72,7 @@
 				.orient("left")
 				.ticks(5)
 
-			// ------------------------------ 画圆
+			//----------------------------- 画svg
 
 			var svg = d3.select("body")
 				.append("svg")
@@ -81,8 +81,24 @@
 				.append("g")
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+			//------------------------------ 画clippath
 
-			var circles = svg.selectAll("circle")
+			svg.append("clipPath")
+				.attr("id", "chart-area")
+				.append("rect")
+				.attr("x",0)
+				.attr("y",-40)
+				.attr("width",w)
+				.attr("height",h+40)
+
+
+			// ------------------------------ 画圆
+			//------------------------------- 使用clipPath
+
+			var circles = svg.append("g")
+				.attr("id","circles")
+				.attr("clip-path","url(#chart-area)") // 引用clipPathselectAll("circle")
+				.selectAll("circle")
 				.data(dataset)
 				.enter()
 				.append("circle");
@@ -107,6 +123,8 @@
 			svg.append("g")
 				.attr("class","y axis")
 				.call(yAxis)
+
+
 
 			//------------------------------- click event
 
@@ -153,7 +171,6 @@
 						// 		.duration(1000)
 						// 		.attr("fill","teal")
 						// })
-
 
 					svg.select(".x.axis")
 				    	.transition()
