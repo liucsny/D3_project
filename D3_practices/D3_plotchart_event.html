@@ -100,12 +100,12 @@
 			//------------------------------- 画数轴
 
 			svg.append("g")
-				.attr("class","axis")
+				.attr("class","x axis")
 				.attr("transform", "translate(0,"+ h +")")
 				.call(xAxis)
 
 			svg.append("g")
-				.attr("class","axis")
+				.attr("class","y axis")
 				.call(yAxis)
 
 			//------------------------------- click event
@@ -125,10 +125,15 @@
 					xScale.domain([0, d3.max(dataset, function(d) { return d[0]; })]);
 					yScale.domain([0, d3.max(dataset, function(d) { return d[1]; })]);
 
+
 					svg.selectAll("circle")
 						.data(dataset)
 						.transition()
 						.duration(1000)
+						// .each("start",function(){
+						// 	d3.select(this)
+						// 		.attr("fill","blue")
+						// })
 						.attr("cx",function(d){
 							return xScale(d[0]);
 						})
@@ -138,6 +143,28 @@
 						.attr("r",function(d){
 							return rScale(d[1]);
 						})
+						// .transition()
+						// .duration(1000)
+						// .attr("fill","black")
+						// .attr("r",5)
+						// .each("end",function(){
+						// 	d3.select(this)
+						// 		.transition()
+						// 		.duration(1000)
+						// 		.attr("fill","teal")
+						// })
+
+
+					svg.select(".x.axis")
+				    	.transition()
+				    	.duration(1000)
+						.call(xAxis);
+
+					svg.select(".y.axis")
+						.transition()
+						.duration(1000)
+						.call(yAxis);
+
 
 
 				})
