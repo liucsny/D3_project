@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>D3: A simple CSS-only hover effect</title>
+		<script type="text/javascript" src="../d3/d3.v3.js"></script>
+		<title></title>
+	</head>
+	<body>
+		<div id="chart"></div>
+		<script type="text/javascript">
+			var margin = { top: 50, right: 10, bottom: 100, left: 30 },
+				width = 1320 - margin.left - margin.right,
+				height = 726 - margin.top - margin.bottom,
+				gridSize = Math.floor(width / 185),
+				legendElementWidth = gridSize*5,
+				colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"],
+				frequency = ["0", "40", "80", "120", "160", "200"],
+				times = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
+				datasets = ["data_converted.csv"];
+
+			var svg = d3.select("#chart").append("svg")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+
+		</script>
+	</body>
+</html>

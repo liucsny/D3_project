@@ -4,17 +4,28 @@
 		<meta charset="utf-8">
 		<title>D3</title>
 		<!-- <script type="text/javascript" src="d3/d3.v4.js"></script> -->
-		<script type="text/javascript" src="d3/d3.v3.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../d3/d3.v3.js" charset="utf-8"></script>
 		<style type="text/css">
 		</style>
 	</head>
 	<body>
-		<p>click here to update</p>
 
 		<script type="text/javascript">
 			var data_2 = [23,13,32,25,12,8,5,34,24,65,42,16,18,23,68,34,54];
 			var w = 600,
 				h = 400;
+
+
+			d3.csv("data_test.csv", function(d) {
+			  return {
+			    year: new Date(+d.Year, 0, 1), // convert "Year" column to Date
+			    make: d.Make,
+			    model: d.Model,
+			    length: +d.Length // convert "Length" column to number
+			  };
+			}, function(error, rows) {
+			  console.log(rows);
+			});
 
 			var xScale = d3.scale.ordinal()
 				.domain(d3.range(data_2.length))
@@ -28,86 +39,6 @@
 				.append("svg")
 				.attr("width",w)
 				.attr("height",h);
-
-
-
-			d3.select("p")
-				.on("click",function(){
-
-					var numberValue = data_2.length;
-					data_2 = [];
-					for (var i = 0; i < numberValue; i++) {
-						var newValue = Math.round(Math.random()*40);
-						data_2.push(newValue);
-					};
-
-					svg.selectAll("rect")
-						.data(data_2)
-						.transition()
-						.duration(1000)
-						// .ease("elastic")
-						.delay(function(d,i){
-							return i/data_2.length*1000;
-						})
-						.attr("y", function(d) {
-					   		return yScale(d);
-						})
-						.attr("height", function(d) {
-					   		return h-yScale(d);
-						})
-						.attr("fill","red");
-
-					svg.selectAll("text")
-						.data(data_2)
-						.transition()
-						.duration(1000)
-						.delay(function(d,i){
-							return i/data_2.length *1000;
-						})
-						// .ease("elastic")
-						.text(function(d){
-							return d;
-						})
-						.attr("y",function(d){
-							return yScale(d)+16;
-						})
-
-				})
-
-			svg.selectAll("rect")
-				.data(data_2)
-				.enter()
-				.append("rect")
-				.attr("x", function(d, i) {
-			   		return xScale(i);
-			   })
-				.attr("y",function(d) {
-			   		return yScale(d);
-			   })
-				.attr("width",xScale.rangeBand())
-				.attr("height",function(d){
-					return h-yScale(d);
-				})
-				.attr("fill","blue")
-
-
-
-			svg.selectAll("text")
-				.data(data_2)
-				.enter()
-				.append("text")
-				.text(function(d){
-					return d;
-				})
-				.attr("x",function(d,i){
-					return xScale(i)+xScale.rangeBand()/2-4;
-				})
-				.attr("y",function(d){
-					return yScale(d)+16;
-				})
-				.attr("font-size","11px")
-				.attr("font-family", "sans-serif")
-				.attr("fill","white");
 
 
 		</script>
