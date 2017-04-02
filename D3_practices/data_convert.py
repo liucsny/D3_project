@@ -13,7 +13,7 @@ for  frequency, row in df.iterrows():
 		for time, item in row.iteritems():
 			# print(time,frequency,int(item))
 			value = int(item)
-			f.append(frequency)
+			f.append(200-frequency)
 			t.append(time)
 			v.append(value)
 

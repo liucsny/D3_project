@@ -1,29 +1,4 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>D3: A simple CSS-only hover effect</title>
-		<script type="text/javascript" src="../d3/d3.v3.js"></script>
-		<title></title>
-
-		<style>
-			rect.bordered {
-				stroke: white;
-				stroke-width:0.4px;   
-			}
-
-			text.mono {
-				font-size: 9pt;
-				font-family: Consolas, courier;
-				fill: #aaa;
-			}
-		</style>
-
-	</head>
-	<body>
-		<div id="chart"></div>
-		<script type="text/javascript">
-			var margin = { top: 50, right: 10, bottom: 100, left: 30 },
+var margin = { top: 50, right: 10, bottom: 100, left: 30 },
 				width = 1320 - margin.left - margin.right,
 				height = 726 - margin.top - margin.bottom,
 				gridSizeWidth = Math.floor((width+14) / 185),
@@ -110,27 +85,3 @@
 			};
 
 			heatmapChart(datasets[0]);
-
-		</script>
-	</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
