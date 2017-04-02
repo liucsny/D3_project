@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="../d3/d3.v3.js"></script>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		var quantize = d3.scale.quantize()
+			.domain([2,2,8,10])
+			.range([1,100]);
+		//分位比例尺
+		var quantile = d3.scale.quantile()
+			.domain([0,1,4,10])
+			.range(d3.range(100));
+
+		console.log(quantile(0)); //输出1
+		console.log(quantile(1)); //输出1
+		console.log(quantile(2)); //输出1
+		console.log(quantile(3)); //输出1
+		console.log(quantile(4)); //输出1
+		console.log(quantile(5)); //输出1
+		console.log(quantile(6)); //输出1
+		console.log(quantile(7)); //输出1
+		console.log(quantile(8)); //输出1
+		console.log(quantile(9)); //输出1
+		console.log(quantile(10)); //输出1
+
+		// console.log(quantile(3)); //输出100
+	</script>
+</body>
+</html>
+
+
+0
+33
+44
+55
+66
+72
+77
+83
+88
+94
+99

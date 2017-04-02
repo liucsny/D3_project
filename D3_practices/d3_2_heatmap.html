@@ -5,6 +5,20 @@
 		<title>D3: A simple CSS-only hover effect</title>
 		<script type="text/javascript" src="../d3/d3.v3.js"></script>
 		<title></title>
+
+		<style>
+/*			rect.bordered {
+				stroke: #E6E6E6;
+				stroke-width:2px;   
+			}*/
+
+			text.mono {
+				font-size: 9pt;
+				font-family: Consolas, courier;
+				fill: #aaa;
+			}
+		</style>
+
 	</head>
 	<body>
 		<div id="chart"></div>
@@ -14,9 +28,10 @@
 				height = 726 - margin.top - margin.bottom,
 				gridSize = Math.floor(width / 185),
 				legendElementWidth = gridSize*5,
+				buckets = 9,
 				colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"],
-				frequency = ["0", "40", "80", "120", "160", "200"],
-				times = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
+				frequency = ["200", "160", "120", "80", "40", "0"],
+				days = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
 				datasets = ["data_converted.csv"];
 
 			var svg = d3.select("#chart").append("svg")
@@ -25,9 +40,86 @@
 				.append("g")
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+			var frequencyLabels = svg.selectAll(".frequencyLabel")
+				.data(frequency)
+				.enter().append("text")
+				.text(function (d) { return d; })
+				.attr("x", 0)
+				.attr("y", function (d, i) { return i * gridSize*10; })
+				.style("text-anchor", "end")
+				.attr("transform", "translate(-6," + gridSize / 1.5 + ")")
+				.attr("class", function (d, i) { 
+					return "frequencyLabel mono axis axis-workweek"; 
+				});
+
+			var dayLabels = svg.selectAll(".dayLabel")
+				.data(days)
+				.enter().append("text")
+				.text(function(d) { return d; })
+				.attr("x", function(d, i) { return i * gridSize*10; })
+				.attr("y", height)
+				.style("text-anchor", "middle")
+				.attr("transform", "translate(" + gridSize / 2 + ", -6)")
+				.attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "dayLabel mono axis axis-workday" : "dayLabel mono axis"); });
 
 
+
+			var heatmapChart = function(csvFile){
+				d3.csv(csvFile,function(d) {
+					return {
+					frequency: +d.frequency,
+					time: +d.time,
+					value: +d.value};
+				},function(error,data){
+					console.log(data);
+					var colorScale = d3.scale.quantile()
+						.domain([0, buckets - 1, d3.max(data, function (d) { return d.value; })])
+						.range(colors)
+
+					var cards = svg.selectAll(".time")
+						.data(data, function(d) {return d.frequency+':'+d.time;});
+
+					cards.append("title");
+
+					cards.enter().append("rect")
+						.attr("x", function(d) { return (d.time - 1) * gridSize; })
+						.attr("y", function(d) { return (d.frequency - 1) * gridSize; })
+						.attr("rx", 4)
+						.attr("ry", 4)
+						.attr("class", "time bordered")
+						.attr("width", gridSize)
+						.attr("height", gridSize)
+						.style("fill", colors[0]);
+
+					cards.transition().duration(1000)
+						.style("fill", function(d) { return colorScale(d.value); });
+
+
+				})
+			};
+
+			heatmapChart(datasets[0]);
 
 		</script>
 	</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
