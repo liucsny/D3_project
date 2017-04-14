@@ -8,6 +8,11 @@ html {
     height: 100%;
 }
 
+#chart text.mono {
+    font-size: 9pt;
+    font-family: Consolas, courier;
+    fill: #aaa;
+}
 
 .navbar {
     padding: 20px 0;
@@ -21,7 +26,7 @@ html {
 
 .first{
     height: 100%;
-    padding-top: 150px;
+    padding-top: 0px;
     text-align: center;
     background: #fff;
 	/*background-color:#78CBFF;*/
@@ -30,7 +35,7 @@ html {
 .second{
 	/*background-color:#78CBFF;*/
     height: 100%;
-    padding-top: 150px;
+    padding-top: 100px;
     text-align: center;
     background: #eee;
 }
@@ -38,7 +43,7 @@ html {
 .third{
 	/*background-color:#78CBFF;*/
     height: 100%;
-    padding-top: 150px;
+    padding-top: 0px;
     text-align: center;
     background: #fff;
 }
@@ -46,7 +51,7 @@ html {
 .fourth{
 	/*background-color:#78CBFF;*/
     height: 100%;
-    padding-top: 150px;
+    padding-top: 0px;
     text-align: center;
     background: #eee;
 }
