@@ -1,4 +1,4 @@
-# D3_project
+#DataVis_project
 
 Capstone project 
 
