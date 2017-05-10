@@ -8,34 +8,66 @@ html {
     height: 100%;
 }
 
-#chart text.mono {
-    font-size: 9pt;
-    font-family: Consolas, courier;
-    fill: #aaa;
+#intro{
+    padding-top: 110px;
+    background-color: white;
+    height: 100%;
 }
+
+.black_sector{
+    background: black;
+    height: 300px;
+    padding-top: 80px;
+}
+
+.page-scroll{
+    color:white;
+}
+
+
+
+
 
 .navbar {
     padding: 20px 0;
     -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
     -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
     transition: background .5s ease-in-out,padding .5s ease-in-out;
+    background-color: black;
+    stroke: none;
 }
 .top-nav-collapse {
     padding: 0;
 }
 
+
+.main_text{
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 24px;
+    padding-bottom: 10px;
+}
+
+.sector_header{
+    color:white;
+    text-align:right;
+    font-size: 50px;
+}
+
+
 .first{
     height: 100%;
-    padding-top: 0px;
+    padding-top: 100px;
     text-align: center;
-    background: #fff;
+    background: black ;
 	/*background-color:#78CBFF;*/
 }
 
 .second{
 	/*background-color:#78CBFF;*/
     height: 100%;
-    padding-top: 100px;
+    padding-top: 200px;
     text-align: center;
     background: #eee;
 }
