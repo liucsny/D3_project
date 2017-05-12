@@ -8,14 +8,10 @@ html {
     height: 100%;
 }
 
-#intro{
-    padding-top: 110px;
-    background-color: white;
-    height: 100%;
-}
 
-.black_sector{
-    background: black;
+
+.sector{
+    background: #F4714E;
     height: 300px;
     padding-top: 80px;
 }
@@ -33,7 +29,7 @@ html {
     -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
     -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
     transition: background .5s ease-in-out,padding .5s ease-in-out;
-    background-color: black;
+    background-color: #262626;
     stroke: none;
 }
 .top-nav-collapse {
@@ -47,6 +43,14 @@ html {
     font-size: 13px;
     line-height: 24px;
     padding-bottom: 10px;
+    text-align: left;
+}
+
+.caption{
+    font-family: sans-serif;
+    text-align:center;
+    font-weight: 800;
+    font-size: 14px;
 }
 
 .sector_header{
@@ -55,21 +59,34 @@ html {
     font-size: 50px;
 }
 
+.title{
+    font-family: sans-serif;
+    text-align:left;
+    font-weight: 800;
+    font-size: 28px;
+    padding-bottom: 15px;
+}
+
+#intro{
+    padding-top: 110px;
+    background-color: white;
+    padding-bottom:100px;
+}
 
 .first{
     height: 100%;
     padding-top: 100px;
     text-align: center;
-    background: black ;
+    background: #262626;
 	/*background-color:#78CBFF;*/
 }
 
 .second{
 	/*background-color:#78CBFF;*/
     height: 100%;
-    padding-top: 200px;
+    padding-top: 120px;
     text-align: center;
-    background: #eee;
+    background: white;
 }
 
 .third{
@@ -77,13 +94,13 @@ html {
     height: 100%;
     padding-top: 0px;
     text-align: center;
-    background: #fff;
+    background: white;
 }
 
 .fourth{
 	/*background-color:#78CBFF;*/
     height: 100%;
-    padding-top: 0px;
+    padding-top: 110px;
     text-align: center;
     background: #eee;
 }
