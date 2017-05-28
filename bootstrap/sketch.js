@@ -1,29 +1,30 @@
-// var r_1=[0.020,0.023,0.028,0.033,0.047,0.151];
-// var r_2=[0.30,0.36,0.46,0.5,0.64,2.41];
-// var square_1;
+
+var lineChartCanvas=function(p){
+
 
 var type=[0,2,4];
 var line_1,line_2,line_3;
 var gender="女性";
 var age="18－24岁";
+var t;
 
-function preload() {
-	t = loadTable("assets/all.csv", "csv", "header");
-	img_1 = loadImage("assets/b_bg.png");
-	img_2 = loadImage("assets/r_bg.png");
+p.preload=function() {
+	t = p.loadTable("assets/all.csv", "csv", "header");
+	img_1 = p.loadImage("assets/b_bg.png");
+	img_2 = p.loadImage("assets/r_bg.png");
 
 }
 
-function setup(){
-	textAlign(CENTER);
-	sel_gender = createSelect();
+p.setup=function(){
+	p.textAlign(p.CENTER);
+	sel_gender = p.createSelect();
 	sel_gender.parent("p5");
 	sel_gender.position(100, -80);
 	sel_gender.option('女性');
 	sel_gender.option('男性');
-	sel_gender.changed(mySelectEvent);
+	sel_gender.changed(p.mySelectEvent_g);
 
-	sel_age = createSelect();
+	sel_age = p.createSelect();
 	sel_age.parent("p5");
 	sel_age.position(200, -80);
 	sel_age.option('18－24岁');
@@ -32,33 +33,34 @@ function setup(){
 	sel_age.option('35－39岁');
 	sel_age.option('40－49岁');
 	sel_age.option('大于50岁');
-	sel_age.changed(mySelectEvent);
+	sel_age.changed(p.mySelectEvent_a);
 
-	var	button = createButton('添加');
-    	button.parent("p5");
-    	button.mousePressed(addLchart);
+	button = p.createButton('添加');
+	button.parent("p5");
+	button.mousePressed(p.addLchart);
 
-	var myCanvas = createCanvas(1170, 1000);
-	    myCanvas.parent("p5");
+	myCanvas = p.createCanvas(1170, 1000);
 
-    background(255,255,255);
+    p.background(255,255,255);
 
 
     // square_1 = new Dsquare(t,r_1,100,100); 
-    line_1 = new Lchart(t,img_1,img_2,310,100,725,148);
-    line_2 = new Lchart(t,img_1,img_2,310,430,725,148);
-    line_3 = new Lchart(t,img_1,img_2,310,770,725,148);
+    line_1 = new p.Lchart(t,img_1,img_2,310,100,725,148);
+    line_2 = new p.Lchart(t,img_1,img_2,310,430,725,148);
+    line_3 = new p.Lchart(t,img_1,img_2,310,770,725,148);
 
-    print(type);
+    // p.print(type);
 }
 
-function draw() {
-	strokeWeight(1);
-	stroke("#DDDDDD");
-	noFill();
-	rect(70,8,1030,310);
-	rect(70,338,1030,310);
-	rect(70,668,1030,310);
+p.draw=function(){
+	// p.print(t);
+
+	p.strokeWeight(1);
+	p.stroke("#DDDDDD");
+	p.noFill();
+	p.rect(70,8,1030,310);
+	p.rect(70,338,1030,310);
+	p.rect(70,668,1030,310);
 	// square_1.display();
 	line_1.display(type[0]);
 	line_2.display(type[1]);
@@ -71,18 +73,26 @@ function draw() {
 
 
 
-
-
-
-
-function mySelectEvent() {
+p.mySelectEvent_g=function() {
 	gender = sel_gender.value();
 	age = sel_age.value();
 	// print(gender,"   ",age);
+	p.addLchart
 
 }
 
-function getIndex(g,a){
+
+
+
+p.mySelectEvent_a=function() {
+	gender = sel_gender.value();
+	age = sel_age.value();
+	// print(gender,"   ",age);
+	p.addLchart
+
+}
+
+p.getIndex=function(g,a){
 	var numg;
 	var numa;
 
@@ -106,23 +116,23 @@ function getIndex(g,a){
 		numa=5;
 	}
 
-	print(g);
-	print(numg,"   ",numa);
+	p.print(g);
+	p.print(numg,"   ",numa);
 
 	var r=(numg*6+numa)*2;
 	return r;
 }
 
-function addLchart() {
-	if(type.includes(getIndex(gender,age))){
+p.addLchart=function() {
+	if(type.includes(p.getIndex(gender,age))){
 	}else{
 		type[2]=type[1]
 		type[1]=type[0]
-		type[0]=getIndex(gender,age);
+		type[0]=p.getIndex(gender,age);
 		line_1.refresh();
 		line_2.refresh();
 		line_3.refresh();
-		print(type);
+		p.print(type);
 	}
 	// print(getIndex(gender,age));
 }
@@ -133,7 +143,7 @@ function addLchart() {
 
 
 
-function Lchart(t,img_1,img_2,p_x,p_y,w,h){
+p.Lchart=function(t,img_1,img_2,p_x,p_y,w,h){
 	this.bg_1=img_1;
 	this.bg_2=img_2;
 	this.table=t;
@@ -146,50 +156,50 @@ function Lchart(t,img_1,img_2,p_x,p_y,w,h){
 	this.l=w/183;
 
 	this.display=function(type){
-		push();
+		p.push();
 		// rect(100,100,200,200);
-		fill(255,255,255);
-		noStroke();
-		rect(this.x,this.y,this.width,this.height);
+		p.fill(255,255,255);
+		p.noStroke();
+		p.rect(this.x,this.y,this.width,this.height);
 	    if (type>11) {
-		    image(this.bg_1, this.x, this.y-60,758,250);
+		    p.image(this.bg_1, this.x, this.y-60,758,250);
 		}else{
-			image(this.bg_2, this.x, this.y-60,758,250);
+			p.image(this.bg_2, this.x, this.y-60,758,250);
 		}
 		
-		noFill();
-	    strokeWeight(1.5);
+		p.noFill();
+	    p.strokeWeight(1.5);
 	    
 
 	    if (type>11) {
-		    stroke("#8EA8BA");
+		    p.stroke("#8EA8BA");
 		}else{
-			stroke("#AA9494");
+			p.stroke("#AA9494");
 		}
 
-	    beginShape();
+	    p.beginShape();
 	    for(var j=0;j<=this.i+1;j++){
 	    	// rect(this.x,this.y,this.width,this.height);
-			curveVertex(this.x+j*this.l,this.y+this.floatMap(this.table.getNum(type, j)));
+			p.curveVertex(this.x+j*this.l,this.y+this.floatMap(this.table.getNum(type, j)));
     	    // print(this.table.getNum(1, j));
 	    }
-	    endShape();
+	    p.endShape();
 
 	    if (type>11) {
-		    stroke("#46A2E0");
+		    p.stroke("#46A2E0");
 		}else{
-			stroke("#FF5050");
+			p.stroke("#FF5050");
 		}
 
-	    beginShape();
+	    p.beginShape();
 	    for(var j=0;j<=this.i+1;j++){
 	    	// rect(this.x,this.y,this.width,this.height);
-			curveVertex(this.x+j*this.l,this.y+this.floatMap(this.table.getNum(type+1, j)));
+			p.curveVertex(this.x+j*this.l,this.y+this.floatMap(this.table.getNum(type+1, j)));
     	    // print(this.table.getNum(1, j));
 	    }
-	    endShape();
+	    p.endShape();
 	    // rect(this.x,this.y,this.width,this.height);
-	    pop();
+	    p.pop();
 
 	    this.update();
 	}
@@ -204,7 +214,7 @@ function Lchart(t,img_1,img_2,p_x,p_y,w,h){
 
 
 	this.floatMap=function(v) {
-	    var r = map(v, 0, this.scale, this.height, 0);
+	    var r = p.map(v, 0, this.scale, this.height, 0);
 	    return r;
 	    // if (r>0) {
 	    //   return r;
@@ -215,10 +225,10 @@ function Lchart(t,img_1,img_2,p_x,p_y,w,h){
 
 	this.refresh=function(){
 		this.i=0
-		loop();
-		noStroke();
-		fill(255,255,255);
-		rect(this.x, this.y-100,788,288)
+		p.loop();
+		p.noStroke();
+		p.fill(255,255,255);
+		p.rect(this.x, this.y-100,788,288)
 	}
 }
 
@@ -275,9 +285,8 @@ function Lchart(t,img_1,img_2,p_x,p_y,w,h){
 //     }
 //   }
 // }
-
-
-
+}
+var p5_lineChart = new p5(lineChartCanvas, 'p5');
 
 
 
