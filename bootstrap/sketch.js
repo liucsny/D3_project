@@ -2,10 +2,9 @@
 var lineChartCanvas=function(p){
 
 
-var type=[0,2,4];
-var line_1,line_2,line_3;
-var gender="女性";
-var age="18－24岁";
+var line_p;
+var line_f;
+
 var t;
 
 p.preload=function() {
@@ -17,220 +16,291 @@ p.preload=function() {
 
 p.setup=function(){
 	p.textAlign(p.CENTER);
-	sel_gender = p.createSelect();
-	sel_gender.parent("p5");
-	sel_gender.position(100, -80);
-	sel_gender.option('女性');
-	sel_gender.option('男性');
-	sel_gender.changed(p.mySelectEvent_g);
-
-	sel_age = p.createSelect();
-	sel_age.parent("p5");
-	sel_age.position(200, -80);
-	sel_age.option('18－24岁');
-	sel_age.option('25－29岁');
-	sel_age.option('30－34岁');
-	sel_age.option('35－39岁');
-	sel_age.option('40－49岁');
-	sel_age.option('大于50岁');
-	sel_age.changed(p.mySelectEvent_a);
-
-	button = p.createButton('添加');
-	button.parent("p5");
-	button.mousePressed(p.addLchart);
 
 	myCanvas = p.createCanvas(1170, 1000);
 
     p.background(255,255,255);
 
+    line_p=new p.Lchart(t,50,8,1030,510);
+    line_f=new p.Lchart(t,50,8,1030,510);
 
-    // square_1 = new Dsquare(t,r_1,100,100); 
-    line_1 = new p.Lchart(t,img_1,img_2,310,100,725,148);
-    line_2 = new p.Lchart(t,img_1,img_2,310,430,725,148);
-    line_3 = new p.Lchart(t,img_1,img_2,310,770,725,148);
-
-    // p.print(type);
 }
 
 p.draw=function(){
+	p.background(255);
 	// p.print(t);
 
-	p.strokeWeight(1);
+	p.strokeWeight(1.5);
 	p.stroke("#DDDDDD");
 	p.noFill();
-	p.rect(70,8,1030,310);
-	p.rect(70,338,1030,310);
-	p.rect(70,668,1030,310);
-	// square_1.display();
-	line_1.display(type[0]);
-	line_2.display(type[1]);
-	line_3.display(type[2]);
-}
+	p.rect(70,8,1030,510);
+	
+	// line.update(1);
+	line_p.display(1.5);
+	line_f.display(1);
 
-
-
-
-
-
-
-p.mySelectEvent_g=function() {
-	gender = sel_gender.value();
-	age = sel_age.value();
-	// print(gender,"   ",age);
-	p.addLchart
-
-}
-
-
-
-
-p.mySelectEvent_a=function() {
-	gender = sel_gender.value();
-	age = sel_age.value();
-	// print(gender,"   ",age);
-	p.addLchart
-
-}
-
-p.getIndex=function(g,a){
-	var numg;
-	var numa;
-
-	if (g=='女性') {
-		numg=0;
-	}else{
-		numg=1;
+	if(p.mouseY<100){
+		line_p.update(0,"#FFA4A4");
+		line_f.update(1,"#918686");
+	}else if(p.mouseY<200){
+		line_p.update(2,"#FFA4A4");
+		line_f.update(3,"#918686");
+	}else if(p.mouseY<300){
+		line_p.update(4,"#FFA4A4");
+		line_f.update(5,"#918686");
+	}else if(p.mouseY<400){
+		line_p.update(6,"#FFA4A4");
+		line_f.update(7,"#918686");
+	}else if(p.mouseY<500){
+		line_p.update(8,"#FFA4A4");
+		line_f.update(9,"#918686");
+	}else if(p.mouseY<600){
+		line_p.update(10,"#FFA4A4");
+		line_f.update(11,"#918686");
+	}else if(p.mouseY<700){
+		line_p.update(12,"#52A1FF");
+		line_f.update(13,"#868B91");
 	}
 
-	if (a=='18－24岁') {
-		numa=0;
-	}else if(a=='25－29岁'){
-		numa=1;
-	}else if(a=='30－34岁'){
-		numa=2;
-	}else if(a=='35－39岁'){
-		numa=3;
-	}else if(a=='40－49岁'){
-		numa=4;
-	}else if(a=='大于50岁'){
-		numa=5;
-	}
 
-	p.print(g);
-	p.print(numg,"   ",numa);
-
-	var r=(numg*6+numa)*2;
-	return r;
 }
 
-p.addLchart=function() {
-	if(type.includes(p.getIndex(gender,age))){
-	}else{
-		type[2]=type[1]
-		type[1]=type[0]
-		type[0]=p.getIndex(gender,age);
-		line_1.refresh();
-		line_2.refresh();
-		line_3.refresh();
-		p.print(type);
-	}
-	// print(getIndex(gender,age));
-}
-
-
-
-
-
-
-
-p.Lchart=function(t,img_1,img_2,p_x,p_y,w,h){
-	this.bg_1=img_1;
-	this.bg_2=img_2;
+p.Lchart=function(t,pos_x,pos_y,width,height){
+	this.c="#000000";
+	this.range=185;
+	this.scale=0.21;
 	this.table=t;
-	this.i=0;
-	this.scale=0.15;
-	this.width=w;
-	this.height=h;
-	this.x=p_x;
-	this.y=p_y;
-	this.l=w/183;
+	this.x=pos_x;
+	this.y=pos_y;
+	this.w=width;
+	this.h=height;
+	this.l=width/200;	
+	this.vex_c=[];
+	this.vex_o=[];
+	this.type=-1;
 
-	this.display=function(type){
-		p.push();
-		// rect(100,100,200,200);
-		p.fill(255,255,255);
-		p.noStroke();
-		p.rect(this.x,this.y,this.width,this.height);
-	    if (type>11) {
-		    p.image(this.bg_1, this.x, this.y-60,758,250);
-		}else{
-			p.image(this.bg_2, this.x, this.y-60,758,250);
-		}
-		
+	for (var j =0 ; j <= this.range; j++) {
+		this.vex_o.push(p.createVector(this.x+j*this.l,p.map(0, 0, this.scale, this.h, 0)));
+	}
+	for (var j =0 ; j <= this.range; j++) {
+		this.vex_c.push(this.vex_o[j]);
+	}
+
+	this.display=function(weight){
+		p.stroke(this.c);
+		p.strokeWeight(weight);
 		p.noFill();
-	    p.strokeWeight(1.5);
-	    
-
-	    if (type>11) {
-		    p.stroke("#8EA8BA");
-		}else{
-			p.stroke("#AA9494");
+		// this.pos_o = p5.Vector.lerp(this.pos_c, this.pos_o, 0.75*this.s);
+		p.beginShape();
+		for (var j =0 ; j <= this.range; j++) {
+			this.vex_o[j] = p5.Vector.lerp(this.vex_c[j], this.vex_o[j], 0.78);
+			p.curveVertex(this.vex_o[j].x+this.x,this.vex_o[j].y+this.y,2,2);
 		}
-
-	    p.beginShape();
-	    for(var j=0;j<=this.i+1;j++){
-	    	// rect(this.x,this.y,this.width,this.height);
-			p.curveVertex(this.x+j*this.l,this.y+this.floatMap(this.table.getNum(type, j)));
-    	    // print(this.table.getNum(1, j));
-	    }
-	    p.endShape();
-
-	    if (type>11) {
-		    p.stroke("#46A2E0");
-		}else{
-			p.stroke("#FF5050");
-		}
-
-	    p.beginShape();
-	    for(var j=0;j<=this.i+1;j++){
-	    	// rect(this.x,this.y,this.width,this.height);
-			p.curveVertex(this.x+j*this.l,this.y+this.floatMap(this.table.getNum(type+1, j)));
-    	    // print(this.table.getNum(1, j));
-	    }
-	    p.endShape();
-	    // rect(this.x,this.y,this.width,this.height);
-	    p.pop();
-
-	    this.update();
+		p.endShape();
 	}
 
-	this.update=function(){
-	    if(this.i<181){
-	      this.i++;
-	    }else{
-	      this.i=181;
-	    }
-	}
+	this.update=function(t,color){
 
+		if(this.type == t){
+		}else{
+			this.c=color;
+			this.type=t;
+			for (var j =0 ; j <= this.range; j++) {
+				var point_x=this.x+j*this.l;
+				var point_y=this.y+this.floatMap(this.table.getNum(t, j));
+				this.vex_c[j]=p.createVector(point_x,point_y);
+
+				// p.print(p.map(this.table.getNum(t, j), 0, this.scale, this.h, 0));
+			}
+		}
+	}
 
 	this.floatMap=function(v) {
-	    var r = p.map(v, 0, this.scale, this.height, 0);
-	    return r;
-	    // if (r>0) {
-	    //   return r;
-	    // } else {
-	    //   return 0;
-	    // }
+	    var r = p.map(v, 0, this.scale, this.h, 0);
+	    if (r>0) {
+	      return r;
+	    } else {
+	      return -100;
+	    }
 	}	
 
-	this.refresh=function(){
-		this.i=0
-		p.loop();
-		p.noStroke();
-		p.fill(255,255,255);
-		p.rect(this.x, this.y-100,788,288)
-	}
+
+
+	// this.floatMap=function(v) {
+	//     var r = p.map(v, 0, this.scale, this.height, 0);
+	//     return r;
+	//     // if (r>0) {
+	//     //   return r;
+	//     // } else {
+	//     //   return 0;
+	//     // }
+	// }
 }
+
+
+
+
+
+// p.mySelectEvent_g=function() {
+// 	gender = sel_gender.value();
+// 	age = sel_age.value();
+// 	// print(gender,"   ",age);
+// 	p.addLchart
+
+// }
+
+
+
+
+// p.mySelectEvent_a=function() {
+// 	gender = sel_gender.value();
+// 	age = sel_age.value();
+// 	// print(gender,"   ",age);
+// 	p.addLchart
+
+// }
+
+// p.getIndex=function(g,a){
+// 	var numg;
+// 	var numa;
+
+// 	if (g=='女性') {
+// 		numg=0;
+// 	}else{
+// 		numg=1;
+// 	}
+
+// 	if (a=='18－24岁') {
+// 		numa=0;
+// 	}else if(a=='25－29岁'){
+// 		numa=1;
+// 	}else if(a=='30－34岁'){
+// 		numa=2;
+// 	}else if(a=='35－39岁'){
+// 		numa=3;
+// 	}else if(a=='40－49岁'){
+// 		numa=4;
+// 	}else if(a=='大于50岁'){
+// 		numa=5;
+// 	}
+
+// 	p.print(g);
+// 	p.print(numg,"   ",numa);
+
+// 	var r=(numg*6+numa)*2;
+// 	return r;
+// }
+
+// p.addLchart=function() {
+// 	// if(type.includes(p.getIndex(gender,age))){
+// 	// }else{
+// 	// 	type[2]=type[1]
+// 	// 	type[1]=type[0]
+// 	// 	type[0]=p.getIndex(gender,age);
+// 	// 	line_1.refresh();
+// 	// 	line_2.refresh();
+// 	// 	line_3.refresh();
+// 	// 	p.print(type);
+// 	// }
+// 	// print(getIndex(gender,age));
+// }
+
+
+
+
+
+
+
+
+
+
+	// this.bg_1=img_1;
+	// this.bg_2=img_2;
+	// this.table=t;
+	// this.i=0;
+	// this.scale=0.15;
+	// this.width=w;
+	// this.height=h;
+	// this.x=p_x;
+	// this.y=p_y;
+	// this.l=w/this.range;
+
+	// this.display=function(type){
+	// 	p.push();
+	// 	// rect(100,100,200,200);
+	// 	p.fill(255,255,255);
+	// 	p.noStroke();
+	// 	p.rect(this.x,this.y,this.width,this.height);
+	//     if (type>11) {
+	// 	    p.image(this.bg_1, this.x, this.y-60,758,250);
+	// 	}else{
+	// 		p.image(this.bg_2, this.x, this.y-60,758,250);
+	// 	}
+		
+	// 	p.noFill();
+	//     p.strokeWeight(1.5);
+	    
+
+	//     if (type>11) {
+	// 	    p.stroke("#8EA8BA");
+	// 	}else{
+	// 		p.stroke("#AA9494");
+	// 	}
+
+	//     p.beginShape();
+	//     for(var j=0;j<=this.i+1;j++){
+	//     	// rect(this.x,this.y,this.width,this.height);
+	// 		p.curveVertex(this.x+j*this.l,this.y+this.floatMap(this.table.getNum(type, j)));
+ //    	    // print(this.table.getNum(1, j));
+	//     }
+	//     p.endShape();
+
+	//     if (type>11) {
+	// 	    p.stroke("#46A2E0");
+	// 	}else{
+	// 		p.stroke("#FF5050");
+	// 	}
+
+	//     p.beginShape();
+	//     for(var j=0;j<=this.i+1;j++){
+	//     	// rect(this.x,this.y,this.width,this.height);
+	// 		p.curveVertex(this.x+j*this.l,this.y+this.floatMap(this.table.getNum(type+1, j)));
+ //    	    // print(this.table.getNum(1, j));
+	//     }
+	//     p.endShape();
+	//     // rect(this.x,this.y,this.width,this.height);
+	//     p.pop();
+
+	//     this.update();
+	// }
+
+	// this.update=function(){
+	//     if(this.i<181){
+	//       this.i++;
+	//     }else{
+	//       this.i=181;
+	//     }
+	// }
+
+
+	// this.floatMap=function(v) {
+	//     var r = p.map(v, 0, this.scale, this.height, 0);
+	//     return r;
+	//     // if (r>0) {
+	//     //   return r;
+	//     // } else {
+	//     //   return 0;
+	//     // }
+	// }	
+
+	// this.refresh=function(){
+	// 	this.i=0
+	// 	p.loop();
+	// 	p.noStroke();
+	// 	p.fill(255,255,255);
+	// 	p.rect(this.x, this.y-100,788,288)
+	// }
+// }
 
 
 

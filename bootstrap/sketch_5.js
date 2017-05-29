@@ -142,7 +142,7 @@ p.ball=function(x,y,s){
 	this.display=function(){
 		// p.print("hello");
 		// if(this.i>10){
-			this.pos_o = p5.Vector.lerp(this.pos_c, this.pos_o, 0.8*this.s);
+		this.pos_o = p5.Vector.lerp(this.pos_c, this.pos_o, 0.75*this.s);
 		// }
 
 		// this.i+=1;
@@ -150,7 +150,7 @@ p.ball=function(x,y,s){
 		p.push();
 		p.rectMode(p.CENTER);
 		p.colorMode(p.HSB,360,100,100);
-		p.fill(this.c,this.a,this.b,70);
+		p.fill(this.c,this.a,this.b,90);
 		p.noStroke();
 		p.rect(this.pos_o.x,this.pos_o.y,10,10);
 		p.pop();

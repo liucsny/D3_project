@@ -7,26 +7,26 @@ p.preload=function() {
 }
 
 p.setup=function(){
-	myCanvas = p.createCanvas(1170, 1100);
-    p.background(255,255,255);
+	// myCanvas = p.createCanvas(1170, 1100);
+ //    p.background(255,255,255);
 
 
-    for(var i=0;i<25;i++){
-	    p.append(Comchart,new p.Comchart(t,100,90+40*i));
-    }
-    p.strokeWeight(2);
-    p.stroke(220,220,220);
-    p.line(100,10,100,1090)
+ //    for(var i=0;i<25;i++){
+	//     p.append(Comchart,new p.Comchart(t,100,90+40*i));
+ //    }
+ //    p.strokeWeight(2);
+ //    p.stroke(220,220,220);
+ //    p.line(100,10,100,1090)
 
-    p.smooth();
+ //    p.smooth();
 
 
 }
 
 p.draw=function(){
-    for(var i=1;i<25;i++){
-		Comchart[i].display(i);
-    }
+  //   for(var i=1;i<25;i++){
+		// Comchart[i].display(i);
+  //   }
 
 }
 
