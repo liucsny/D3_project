@@ -8,9 +8,6 @@ var g_d=[];
 
 var data=[213,197,166,217,210,267,730];
 
-p.preload=function() {
-	// t = p.loadTable("assets/all.csv", "csv", "header");
-}
 
 p.setup=function(){
 	myCanvas = p.createCanvas(1170, 2600);
@@ -32,7 +29,7 @@ p.setup=function(){
 }
 
 p.draw=function(){
-	// p.print(a);
+	// p.print(document.body.scrollTop);
 	p.background(255);
 
 	bs_510.run();
@@ -43,7 +40,7 @@ p.draw=function(){
 	bs_1010.run();
 	bs_1111.run();
 
-	if (p.mouseY<600){
+	if (document.body.scrollTop<4600){
 		// p.ellipse(100,100,100,100);
 		bs_510.move(g_a[0],200,78,85);
 		bs_610.move(g_a[1],200,78,85);
@@ -54,28 +51,40 @@ p.draw=function(){
 		bs_1111.move(g_a[6],200,78,85);
 	}
 
-	if ((p.mouseY>600)&(p.mouseY<1300)){
-		bs_510.move(g_b[0],185,58,82);
-		bs_610.move(g_b[1],200,58,82);
-		bs_710.move(g_b[2],215,58,82);
-		bs_810.move(g_b[3],230,58,82);
-		bs_910.move(g_b[4],245,58,82);
-		bs_1010.move(g_b[5],260,48,82);
-		bs_1111.move(g_b[6],260,48,82);
+	if ((document.body.scrollTop>4600)&(document.body.scrollTop<4900)){
+		// p.ellipse(100,100,100,100);
+		bs_510.move(g_a[0],10,58,82);
+		bs_610.move(g_a[1],40,58,82);
+		bs_710.move(g_a[2],130,58,82);
+		bs_810.move(g_a[3],170,58,82);
+		bs_910.move(g_a[4],200,58,82);
+		bs_1010.move(g_a[5],235,48,82);
+		bs_1111.move(g_a[6],235,48,82);
 	}
 
-	if ((p.mouseY>1300)&(p.mouseY<1900)){
-		bs_510.move(g_c[0],155,58,82);
-		bs_610.move(g_c[1],170,58,82);
-		bs_710.move(g_c[2],185,58,82);
-		bs_810.move(g_c[3],200,58,82);
-		bs_910.move(g_c[4],215,58,82);
-		bs_1010.move(g_c[5],240,48,82);
-		bs_1111.move(g_c[6],240,58,92);
+
+	if ((document.body.scrollTop>4900)&(document.body.scrollTop<5500)){
+		bs_510.move(g_b[0],10,58,82);
+		bs_610.move(g_b[1],40,58,82);
+		bs_710.move(g_b[2],130,58,82);
+		bs_810.move(g_b[3],170,58,82);
+		bs_910.move(g_b[4],200,58,82);
+		bs_1010.move(g_b[5],235,48,82);
+		bs_1111.move(g_b[6],235,48,82);
 	}
 
-	if (p.mouseY>1900){
-		bs_1111.move(g_d,240,58,92);
+	if ((document.body.scrollTop>5500)&(document.body.scrollTop<6000)){
+		bs_510.move(g_c[0],10,58,82);
+		bs_610.move(g_c[1],40,58,82);
+		bs_710.move(g_c[2],130,58,82);
+		bs_810.move(g_c[3],170,58,82);
+		bs_910.move(g_c[4],200,58,82);
+		bs_1010.move(g_c[5],235,48,82);
+		bs_1111.move(g_c[6],265,68,82);
+	}
+
+	if (document.body.scrollTop>6000){
+		bs_1111.move(g_d,265,68,82);
 	}
 	p.push();
 	p.rectMode(p.CENTER);
@@ -259,153 +268,6 @@ p.iniGroup=function(){
 	//======================
 
 }
-// p.box=function(pos,s){
-// 	this.position=pos;
-// 	this.r=s;
-// 	this.w=300;
-// 	this.h=100;
-
-// 	var bd = new box2d.b2BodyDef();
-// 	bd.type = box2d.b2BodyType.b2_dynamicBody;
-// 	bd.position = scaleToWorld(this.position.x,this.position.y);
-
-// 	// Define a fixture
-// 	var fd = new box2d.b2FixtureDef();
-// 	// Fixture holds shape
-// 	  fd.shape = new box2d.b2PolygonShape();
-// 	  fd.shape.SetAsBox(scaleToWorld(this.w/2), scaleToWorld(this.h/2));
-
-
-// 	fd.density = 1.0;
-// 	fd.friction = 0.2;
-// 	fd.restitution = 0.90;
-
-// 	this.body = world.CreateBody(bd);
-// 	// Attach the fixture
-// 	this.body.CreateFixture(fd);
-
-// 	this.display=function(x,y){
-
-
-// 		var pos = scaleToPixels(this.body.GetPosition());
-// 		// this.position=ta;
-// 	    p.rectMode(p.CENTER);
-// 	    p.push();
-// 	    p.translate(pos.x,pos.y);
-// 	    // p.rotate(a);
-// 	    p.fill(127);
-// 	    // p.stroke(200);
-// 	    p.strokeWeight(2);
-// 	    p.rect(0, 0, this.w, this.h);
-// 	    p.pop();
-
-// 	}
-
-
-
-// }
-
-// p.bubbleChart=function(){
-
-// }
-
-// p.bubble=function(lo,s){
-// 	this.position=lo;
-// 	this.target;
-// 	this.r=s;
-
-
-//    // Define a body
-// 	var bd = new box2d.b2BodyDef();
-// 	bd.type = box2d.b2BodyType.b2_dynamicBody;
-// 	bd.position = scaleToWorld(this.position.x,this.position.y);
-
-// 	// Define a fixture
-// 	var fd = new box2d.b2FixtureDef();
-// 	// Fixture holds shape
-// 	fd.shape = new box2d.b2CircleShape();
-// 	fd.shape.radius = scaleToWorld(this.r/2);
-
-
-// 	fd.density = 1.0;
-// 	fd.friction = 0.2;
-// 	fd.restitution = 0.90;
-
-// 	this.body = world.CreateBody(bd);
-// 	// Attach the fixture
-// 	this.body.CreateFixture(fd);
-
-// 	// this.body.SetGravity(0,0);
-
-// 	this.display=function(){
-// 		this.applyForce();
-
-// 		var pos = scaleToPixels(this.body.GetPosition());
-// 		// this.position=ta;
-// 		p.push();
-// 	    p.translate(pos.x,pos.y);
-// 	    p.fill(100,100,100);
-// 		p.ellipse(0,0,this.r,this.r);
-// 		p.pop();
-// 	}
-
-// 	this.applyForce=function(target_pos){
-// 		var box_position=this.body.GetWorldCenter();
-// 		// p.print(box_position);
-
-
-// 		var force = p5.Vector.sub(target_pos,box_position);
-// 		force.normalize();
-
-// 		this.body.ApplyForce(force,box_position);
-
-// 	}
-
-// }
-
-
-// p.bubble_m=function(lo,s){
-// 	this.position=lo;
-// 	this.target;
-// 	this.r=s;
-
-
-//    // Define a body
-// 	var bd = new box2d.b2BodyDef();
-// 	bd.type = box2d.b2BodyType.b2_staticBody;
-// 	bd.position = scaleToWorld(this.position.x,this.position.y);
-
-// 	// Define a fixture
-// 	var fd = new box2d.b2FixtureDef();
-// 	// Fixture holds shape
-// 	fd.shape = new box2d.b2CircleShape();
-// 	fd.shape.m_radius = scaleToWorld(this.r);
-
-
-// 	fd.density = 1.0;
-// 	fd.friction = 0.0;
-// 	fd.restitution = 0.0;
-
-// 	this.body = world.CreateBody(bd);
-// 	// Attach the fixture
-// 	this.body.CreateFixture(fd);
-
-// 	// this.body.SetGravity(0,0);
-
-// 	this.display=function(x,y){
-// 		// this.applyForce();
-
-// 		var pos = scaleToPixels(this.body.GetPosition());
-// 		// this.position=ta;
-// 		p.push();
-// 	    p.translate(pos.x,pos.y);
-// 	    p.fill(100,100,100);
-// 		p.ellipse(0,0,this.r,this.r);
-// 		p.pop();
-// 	}
-
-
-// }
 
 
 }
