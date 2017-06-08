@@ -9,15 +9,15 @@ p.preload=function() {
 
 p.setup=function(){
 	myCanvas = p.createCanvas(1170, 1100);
-
-
     chart = new p.Fsys(t);
 
-
+    // myVideo=p.createVideo("assets/commodity.mov");
+    // myVideo.parent("mov_1");
+    // myVideo.position(50, 100);
+    // myVideo.loop();
 }
 
-p.
-draw=function(){
+p.draw=function(){
     p.background(255,255,255);
 	chart.run();
 	

@@ -24,6 +24,18 @@ p.setup=function(){
     line_p=new p.Lchart(t,50,8,1030,510);
     line_f=new p.Lchart(t,50,8,1030,510);
 
+
+    myDiv = p.createDiv('this is some text');
+
+
+	sel = p.createSelect();
+	sel.class("gender")
+	sel.position(10, 10);
+	sel.option('pear');
+	sel.option('kiwi');
+	sel.option('grape');
+	sel.changed(p.mySelectEvent);
+
 }
 
 p.draw=function(){
@@ -61,7 +73,9 @@ p.draw=function(){
 		line_p.update(12,"#52A1FF");
 		line_f.update(13,"#868B91");
 	}
+}
 
+p.mySelectEvent=function(){
 
 }
 
