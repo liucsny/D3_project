@@ -14,7 +14,7 @@ html {
   position: relative;
   overflow: hidden;
   height: 32px;
-  width: 120px;
+  width: auto;
   background: #f2f2f2;
   border: 2px solid;
   border-color: white #f7f7f7 #f5f5f5;
@@ -46,44 +46,6 @@ html {
     border-bottom: none;
   }
 }
-
-.gender-select {
-  position: relative;
-  width: 130%;
-  margin: 0;
-  padding: 6px 8px 6px 10px;
-  height: 28px;
-  line-height: 14px;
-  font-size: 12px;
-  color: #62717a;
-  text-shadow: 0 1px white;
-  /* Fallback for IE 8 */
-  background: #f2f2f2;
-  /* "transparent" doesn't work with Opera */
-  background: rgba(black, 0) !important;
-  border: 0;
-  border-radius: 0;
-  -webkit-appearance: none;
-
-  &:focus {
-    z-index: 3;
-    width: 100%;
-    color: #394349;
-    outline: 2px solid #49aff2;
-    outline: 2px solid -webkit-focus-ring-color;
-    outline-offset: -2px;
-  }
-
-  > option {
-    margin: 3px;
-    padding: 6px 8px;
-    text-shadow: none;
-    background: #f2f2f2;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-}
-
 
 .but{
     width:100px;
@@ -120,7 +82,7 @@ html {
 
 
 #landing{
-    padding-top: 200px;
+    padding-top: 70px;
 }
 
 #comgif{
@@ -247,5 +209,22 @@ html {
     height: 200%;
     padding-top: 110px;
     text-align: center;
-    background: #eee;
+    background: white;
+}
+.video{
+  padding-top: 20px;
+}
+
+.seventh{
+    /*background-color:#78CBFF;*/
+    height: 200%;
+    padding-top: 110px;
+    text-align: center;
+    background: #000000;
+}
+
+.footer{
+    background: #212121;
+    height: 300px;
+    padding-top: 80px;
 }

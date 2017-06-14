@@ -7,10 +7,15 @@ var line_f;
 
 var t;
 
+var gender='女';
+var age='18~25岁';
+var img_1;
+var img_2;
+
 p.preload=function() {
 	t = p.loadTable("assets/all.csv", "csv", "header");
-	img_1 = p.loadImage("assets/b_bg.png");
-	img_2 = p.loadImage("assets/r_bg.png");
+	img_1 = p.loadImage("assets/bg1.png");
+	img_2 = p.loadImage("assets/bg2.png");
 
 }
 
@@ -21,63 +26,109 @@ p.setup=function(){
 
     p.background(255,255,255);
 
-    line_p=new p.Lchart(t,50,8,1030,510);
-    line_f=new p.Lchart(t,50,8,1030,510);
+    line_p=new p.Lchart(t,50,28,1030,510);
+    line_f=new p.Lchart(t,50,28,1030,510);
 
 
-    myDiv = p.createDiv('this is some text');
+    // myDiv = p.createDiv('this is some text');
 
 
 	sel = p.createSelect();
 	sel.class("gender")
-	sel.position(10, 10);
-	sel.option('pear');
-	sel.option('kiwi');
-	sel.option('grape');
-	sel.changed(p.mySelectEvent);
+	sel.position(100, 10);
+	sel.option('女');
+	sel.option('男');
+	sel.changed(p.mySelectEvent_g);
+
+	sel_a = p.createSelect();
+	sel_a.class("gender")
+	sel_a.position(260, 10);
+	sel_a.option('18~25岁');
+	sel_a.option('25～30岁');
+	sel_a.option('30～35岁');
+	sel_a.option('35～40岁');
+	sel_a.option('40～50岁');
+	sel_a.option('大于50岁');
+	sel_a.changed(p.mySelectEvent_g);
 
 }
 
+p.mySelectEvent_g=function(){
+	gender = sel.value();
+	age = sel_a.value();
+	// p.print(gender,"   ",age);
+}
+
 p.draw=function(){
+	// p.print(gender,"   ",age);
 	p.background(255);
 	// p.print(t);
+
+
+
+	
+	// line.update(1);
+	if(gender=='女'){
+		p.image(img_1, 150, 80,900,490);
+	}else{
+		p.image(img_2, 150, 80,900,490);
+	}
+
+	line_p.display(1.5);
+	line_f.display(1);
+
+	if((gender=='女')&(age=='18~25岁')){
+		line_p.update(0,"#FFA4A4");
+		line_f.update(1,"#918686");
+	}else if((gender=='女')&(age=='25～30岁')){
+		line_p.update(2,"#FFA4A4");
+		line_f.update(3,"#918686");
+	}else if((gender=='女')&(age=='30～35岁')){
+		line_p.update(4,"#FFA4A4");
+		line_f.update(5,"#918686");
+	}else if((gender=='女')&(age=='35～40岁')){
+		line_p.update(6,"#FFA4A4");
+		line_f.update(7,"#918686");
+	}else if((gender=='女')&(age=='40～50岁')){
+		line_p.update(8,"#FFA4A4");
+		line_f.update(9,"#918686");
+	}else if((gender=='女')&(age=='大于50岁')){
+		line_p.update(10,"#FFA4A4");
+		line_f.update(11,"#918686");
+	}else if((gender=='男')&(age=='18~25岁')){
+		line_p.update(12,"#47C4C4");
+		line_f.update(13,"#868B91");
+	}else if((gender=='男')&(age=='25～30岁')){
+		line_p.update(14,"#47C4C4");
+		line_f.update(15,"#868B91");
+	}else if((gender=='男')&(age=='30～35岁')){
+		line_p.update(16,"#47C4C4");
+		line_f.update(17,"#868B91");
+	}else if((gender=='男')&(age=='35～40岁')){
+		line_p.update(18,"#47C4C4");
+		line_f.update(19,"#868B91");
+	}else if((gender=='男')&(age=='40～50岁')){
+		line_p.update(20,"#47C4C4");
+		line_f.update(21,"#868B91");
+	}else{
+		line_p.update(22,"#47C4C4");
+		line_f.update(23,"#868B91");
+	}
+
+
+	p.noStroke();
+	p.fill(255);
+	p.rect(800,0,800,80);
 
 	p.strokeWeight(1.5);
 	p.stroke("#DDDDDD");
 	p.noFill();
-	p.rect(70,8,1030,510);
-	
-	// line.update(1);
-	line_p.display(1.5);
-	line_f.display(1);
+	p.rect(70,65,1030,520);
 
-	if(p.mouseY<100){
-		line_p.update(0,"#FFA4A4");
-		line_f.update(1,"#918686");
-	}else if(p.mouseY<200){
-		line_p.update(2,"#FFA4A4");
-		line_f.update(3,"#918686");
-	}else if(p.mouseY<300){
-		line_p.update(4,"#FFA4A4");
-		line_f.update(5,"#918686");
-	}else if(p.mouseY<400){
-		line_p.update(6,"#FFA4A4");
-		line_f.update(7,"#918686");
-	}else if(p.mouseY<500){
-		line_p.update(8,"#FFA4A4");
-		line_f.update(9,"#918686");
-	}else if(p.mouseY<600){
-		line_p.update(10,"#FFA4A4");
-		line_f.update(11,"#918686");
-	}else if(p.mouseY<700){
-		line_p.update(12,"#52A1FF");
-		line_f.update(13,"#868B91");
-	}
-}
-
-p.mySelectEvent=function(){
 
 }
+
+
 
 p.Lchart=function(t,pos_x,pos_y,width,height){
 	this.c="#000000";
@@ -160,7 +211,6 @@ p.Lchart=function(t,pos_x,pos_y,width,height){
 // 	age = sel_age.value();
 // 	// print(gender,"   ",age);
 // 	p.addLchart
-
 // }
 
 
@@ -171,7 +221,6 @@ p.Lchart=function(t,pos_x,pos_y,width,height){
 // 	age = sel_age.value();
 // 	// print(gender,"   ",age);
 // 	p.addLchart
-
 // }
 
 // p.getIndex=function(g,a){

@@ -2,26 +2,52 @@ var commodityChartCanvas=function(p){
 // var =[];
 var t;
 var chart;
+var sw=false;
+// var myVideo;
+// var playing = false;
 
 p.preload=function() {
 	t = p.loadTable("assets/f_p.csv", "csv", "header");
 }
 
 p.setup=function(){
+    // myVideo=p.createVideo("assets/linemap1.mp4");
+    // myVideo.parent("mov_1");
+    // myVideo.position(50, 500);
+    // myVideo.loop();
+
+
 	myCanvas = p.createCanvas(1170, 1100);
     chart = new p.Fsys(t);
 
-    // myVideo=p.createVideo("assets/commodity.mov");
-    // myVideo.parent("mov_1");
-    // myVideo.position(50, 100);
-    // myVideo.loop();
+	b_1 = p.createButton('按人数');
+	b_1.position(900, 120);
+	b_1.mousePressed(p.s1);
+	b_1.addClass("but");
+	b_2 = p.createButton('按金额');
+	b_2.position(900, 170);
+	b_2.mousePressed(p.s2);
+	b_2.addClass("but");
+
+}
+
+p.s1=function(){
+	sw=false;
+}
+p.s2=function(){
+	sw=true;
 }
 
 p.draw=function(){
+	// if (!playing) {
+	// 	myVideo.play();
+	// 	playing = true;
+	// }
+
     p.background(255,255,255);
 	chart.run();
 	
-	if(p.mouseX>400){
+	if(sw){
 		chart.change(5);
 	}else{
 		chart.change(0);
